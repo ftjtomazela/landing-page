@@ -3,74 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Personal - 82kg</title>
+    <title>Meu Personal - Projeto 82kg</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            background: #121212; 
-            color: #ffffff; 
-            margin: 0; 
-            padding: 20px; 
+        :root {
+            --primary: #f39c12;
+            --bg-dark: #121212;
+            --card-bg: #1e1e1e;
+            --text-light: #ffffff;
+            --text-muted: #888888;
         }
-        h1 { color: #f39c12; text-align: center; }
-        h2 { color: #f39c12; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: var(--bg-dark); 
+            color: var(--text-light); 
+            margin: 0; 
+            padding: 0; 
+        }
+        header {
+            background: #000000;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+        }
+        h1 { margin: 0; color: var(--primary); font-size: 1.5em; text-transform: uppercase; letter-spacing: 1px;}
+        p.subtitle { margin: 5px 0 0 0; color: var(--text-muted); font-size: 0.9em; }
+        
+        /* Estilo das Abas */
+        .tabs {
+            display: flex;
+            background: #000;
+            overflow-x: auto;
+        }
+        .tab-button {
+            background: inherit;
+            color: var(--text-light);
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 15px 20px;
+            font-size: 1em;
+            font-weight: bold;
+            flex: 1;
+            text-align: center;
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        .tab-button:hover { background: #222; }
+        .tab-button.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+
+        /* Conteúdo das Abas */
+        .tab-content {
+            display: none;
+            padding: 20px;
+            animation: fadeEffect 0.5s;
+        }
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        /* Cartões e Checkboxes */
+        h2 { color: var(--primary); border-bottom: 1px dashed #333; padding-bottom: 8px; margin-top: 0; }
         .card { 
-            background: #1e1e1e; 
+            background: var(--card-bg); 
             padding: 15px; 
-            border-radius: 8px; 
+            border-radius: 10px; 
             margin-bottom: 20px; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
         label { 
             display: flex; 
-            align-items: center; 
+            align-items: flex-start; 
             margin: 15px 0; 
-            font-size: 1.1em; 
+            font-size: 1.05em; 
             cursor: pointer; 
+            line-height: 1.4;
         }
         input[type="checkbox"] { 
-            transform: scale(1.5); 
+            transform: scale(1.4); 
             margin-right: 15px; 
-            accent-color: #f39c12;
+            margin-top: 4px;
+            accent-color: var(--primary);
         }
-        .checked { 
+        .checked span { 
             text-decoration: line-through; 
-            color: #888888; 
+            color: var(--text-muted); 
         }
+
         footer { 
             text-align: center; 
-            margin-top: 40px; 
+            margin-top: 20px; 
+            padding: 20px;
             font-size: 0.85em; 
-            color: #777; 
-            border-top: 1px solid #333;
-            padding-top: 20px;
+            color: #555; 
+            background: #000;
         }
-        a { color: #f39c12; text-decoration: none; }
+        a { color: var(--primary); text-decoration: none; }
     </style>
 </head>
 <body>
-    <h1>🔥 Diário de Treino e Dieta</h1>
 
-    <div class="card">
-        <h2>🍳 Alimentação Base</h2>
-        <label><input type="checkbox" onclick="toggleStrike(this)"> Café da manhã: Pão, café, requeijão + 3-4 ovos</label>
-        <label><input type="checkbox" onclick="toggleStrike(this)"> Almoço: Arroz, feijão (com aquele bacon), proteína e salada</label>
-        <label><input type="checkbox" onclick="toggleStrike(this)"> Lanche: Fruta com aveia ou Whey</label>
-        <label><input type="checkbox" onclick="toggleStrike(this)"> Jantar: Proteína caprichada (ou aquele churrasco) + carbo limpo</label>
-        <label><input type="checkbox" onclick="toggleStrike(this)"> Meta de Água: 3,5L a 4L no dia</label>
+    <header>
+        <h1>🔥 Meu Personal</h1>
+        <p class="subtitle">Recomposição Corporal - Manter 82kg</p>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-button active" onclick="openTab(event, 'Dieta')">🍎 Dieta</button>
+        <button class="tab-button" onclick="openTab(event, 'Treino')">🏋️ Treinos</button>
+        <button class="tab-button" onclick="openTab(event, 'Cardio')">🚴 Cardio</button>
     </div>
 
-    <div class="card">
-        <h2>🏋️ Treino de Força (Segurar a Perna!)</h2>
-        <label><input type="checkbox" onclick="toggleStrike(this)"> Aquecimento</label>
-        <label><input type="checkbox" onclick="toggleStrike(this)"> Exercícios Base (Agachamento/Leg/Supino) com progressão de carga</label>
-        <label><input type="checkbox" onclick="toggleStrike(this)"> Exercícios Complementares</label>
-        <label><input type="checkbox" onclick="toggleStrike(this)"> Panturrilha ou Abdômen</label>
+    <div id="Dieta" class="tab-content" style="display: block;">
+        <div class="card">
+            <h2>Café da Manhã</h2>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Pão francês (ou de forma) com requeijão + Café puro</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>3 a 4 ovos mexidos (pode por 1 fatia de queijo)</span></label>
+        </div>
+        <div class="card">
+            <h2>Almoço</h2>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Arroz (4 colheres) e Feijão (com cubos de bacon)</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Proteína (150g a 200g): Frango, carne moída ou lombo</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Salada à vontade com azeite</span></label>
+        </div>
+        <div class="card">
+            <h2>Lanche / Pré-Treino</h2>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>1 banana com aveia + 1 dose de Whey Protein</span></label>
+        </div>
+        <div class="card">
+            <h2>Jantar / Fim de Semana</h2>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Jantar: Proteína (150g) + Batata ou Arroz/Feijão</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>FDS: Pizza (3 a 4 pedaços) ou Churrasco (foco nas carnes)</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Meta do dia: 3,5L a 4L de água</span></label>
+        </div>
     </div>
 
-    <div class="card">
-        <h2>🚴 Cardio Estratégico</h2>
-        <label><input type="checkbox" onclick="toggleStrike(this)"> 20 a 30 min (SÓ nos dias de membros superiores ou descanso)</label>
+    <div id="Treino" class="tab-content">
+        <div class="card">
+            <h2>Segunda: Costas e Bíceps</h2>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Puxada Frente (4x 8-10)</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Remada Curvada (4x 8-10)</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Remada Baixa Triângulo (3x 10-12)</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Rosca Direta e Martelo (Bíceps)</span></label>
+        </div>
+        <div class="card">
+            <h2>Terça: Pernas (Quadríceps)</h2>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Agachamento Livre (4x 8-10)</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Leg Press 45º (4x 10-12)</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Cadeira Extensora (4x 10-12)</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Panturrilha (4x 15)</span></label>
+        </div>
+        <div class="card">
+            <h2>Quarta: Peito, Ombro e Tríceps</h2>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Supino Reto e Inclinado (4x 8-10)</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Desenvolvimento e Elevação Lateral (Ombros)</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Tríceps na Polia (4x 10-12)</span></label>
+        </div>
+        <div class="card">
+            <h2>Sexta: Pernas (Posterior)</h2>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Stiff (4x 8-10)</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Mesa/Cadeira Flexora (4x 10-12)</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Elevação Pélvica (3x 10-12)</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Panturrilha (4x 15)</span></label>
+        </div>
+    </div>
+
+    <div id="Cardio" class="tab-content">
+        <div class="card">
+            <h2>A Regra de Ouro</h2>
+            <p style="font-size: 0.9em; color: var(--text-muted); margin-top: 0;">Sempre DEPOIS do treino de musculação ou em dias de descanso. Nunca antes de puxar ferro!</p>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Segunda: 20 a 30 min (Esteira ou Bike)</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Terça (Perna): ZERO CARDIO</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Quarta: 20 a 30 min (Esteira ou Bike)</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Quinta: 30 min de caminhada livre ou descanso</span></label>
+            <label><input type="checkbox" onclick="toggleStrike(this)"> <span>Sexta (Perna): ZERO CARDIO</span></label>
+        </div>
     </div>
 
     <footer>
@@ -79,13 +189,34 @@
     </footer>
 
     <script>
-        // Função simples para riscar o texto quando marcar o checkbox
+        // Função para riscar o texto
         function toggleStrike(checkbox) {
             if(checkbox.checked) {
                 checkbox.parentElement.classList.add("checked");
             } else {
                 checkbox.parentElement.classList.remove("checked");
             }
+        }
+
+        // Função para trocar as abas
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            
+            // Esconde todo o conteúdo das abas
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            // Remove a classe "active" de todos os botões
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            // Mostra a aba atual e adiciona "active" no botão clicado
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
         }
     </script>
 </body>
